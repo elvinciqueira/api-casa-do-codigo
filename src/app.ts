@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import 'dotenv/config';
 
 import express, { Request, Response, NextFunction } from 'express';
+import 'express-async-errors';
 
 import routes from './routes';
 import AppError from './errors/AppError';
@@ -22,11 +23,11 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
     });
   }
 
-  console.log(err);
+  console.error(err);
 
   return response.status(500).json({
     status: 'error',
-    message: 'Internal Server Error',
+    message: 'Internal server error',
   });
 });
 

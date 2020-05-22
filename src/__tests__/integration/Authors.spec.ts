@@ -2,6 +2,7 @@ import request from 'supertest';
 
 import { getConnection, Connection } from 'typeorm';
 import createConnection from '../../database';
+// import AppError from '../../errors/AppError';
 
 // import Authors from '../../models/Authors';
 
@@ -33,12 +34,36 @@ describe('Authors', () => {
       description: 'Descrição supimpa',
     });
 
-    await expect(response.body).toEqual(
+    expect(response.body).toEqual(
       expect.objectContaining({
         name: 'Elvin Ciqueira',
         email: 'elvinciqueira@gmail.com',
         description: 'Descrição supimpa',
       }),
     );
+  });
+
+  it('it should not be able to create a author with one e-mail thats already registered', async () => {
+    const author = await request(app).post('/authors').send({
+      name: 'Elvin Ciqueira',
+      email: 'elvinciqueira@gmail.com',
+      description: 'descrição supimpa',
+    });
+
+    expect(author.body).toEqual(
+      expect.objectContaining({
+        name: 'Elvin Ciqueira',
+        email: 'elvinciqueira@gmail.com',
+        description: 'descrição supimpa',
+      }),
+    );
+
+    const response = await request(app).post('/authors').send({
+      name: 'Elvin Ciqueira',
+      email: 'elvinciqueira@gmail.com',
+      description: 'descrição supimpa',
+    });
+
+    expect(response.status).toBe(400);
   });
 });

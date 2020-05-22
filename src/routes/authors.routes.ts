@@ -1,21 +1,10 @@
 import { Router } from 'express';
 
-import CreateAuthorsService from '../services/CreateAuthorsService';
+import CreateAuthorController from '../controllers/CreateAuthorsController';
 
 const authorsRouter = Router();
+const authorController = new CreateAuthorController();
 
-authorsRouter.post('/', async (request, response) => {
-  const { name, email, description } = request.body;
-
-  const createAuthors = new CreateAuthorsService();
-
-  const authors = await createAuthors.execute({
-    name,
-    email,
-    description,
-  });
-
-  return response.json(authors);
-});
+authorsRouter.post('/', authorController.create);
 
 export default authorsRouter;
