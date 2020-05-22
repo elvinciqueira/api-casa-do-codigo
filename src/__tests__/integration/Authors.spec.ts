@@ -2,9 +2,6 @@ import request from 'supertest';
 
 import { getConnection, Connection } from 'typeorm';
 import createConnection from '../../database';
-// import AppError from '../../errors/AppError';
-
-// import Authors from '../../models/Authors';
 
 import app from '../../app';
 
