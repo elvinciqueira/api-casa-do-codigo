@@ -26,39 +26,39 @@ describe('Authors', () => {
 
   it('it should be able to create a new author', async () => {
     const response = await request(app).post('/authors').send({
-      name: 'Elvin Ciqueira',
-      email: 'elvinciqueira@gmail.com',
-      description: 'Descrição supimpa',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      description: 'some description',
     });
 
     expect(response.body).toEqual(
       expect.objectContaining({
-        name: 'Elvin Ciqueira',
-        email: 'elvinciqueira@gmail.com',
-        description: 'Descrição supimpa',
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        description: 'some description',
       }),
     );
   });
 
   it('it should not be able to create a author with one e-mail thats already registered', async () => {
     const author = await request(app).post('/authors').send({
-      name: 'Elvin Ciqueira',
-      email: 'elvinciqueira@gmail.com',
-      description: 'descrição supimpa',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      description: 'some description',
     });
 
     expect(author.body).toEqual(
       expect.objectContaining({
-        name: 'Elvin Ciqueira',
-        email: 'elvinciqueira@gmail.com',
-        description: 'descrição supimpa',
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        description: 'some description',
       }),
     );
 
     const response = await request(app).post('/authors').send({
-      name: 'Elvin Ciqueira',
-      email: 'elvinciqueira@gmail.com',
-      description: 'descrição supimpa',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      description: 'some description',
     });
 
     expect(response.status).toBe(400);
