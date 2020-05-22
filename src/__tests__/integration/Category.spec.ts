@@ -10,12 +10,13 @@ let connection: Connection;
 describe('Category', () => {
   beforeAll(async () => {
     connection = await createConnection('test-connection');
+
     await connection.runMigrations();
   });
 
   beforeEach(async () => {
-    await connection.query('DELETE FROM categories');
     await connection.query('DELETE FROM authors');
+    await connection.query('DELETE FROM categories');
   });
 
   afterAll(async () => {

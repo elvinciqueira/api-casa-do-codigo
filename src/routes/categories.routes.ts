@@ -2,11 +2,11 @@ import { Router } from 'express';
 
 import CreateCategoriesController from '../controllers/CreateCategoriesController';
 
-// import validateAuthorCreate from '../validators/AuthorCreate';
+import validateCategoryCreate from '../validators/CategoryCreate';
 
 const categoriesRouter = Router();
 const categoryController = new CreateCategoriesController();
 
-categoriesRouter.post('/', categoryController.create);
+categoriesRouter.post('/', validateCategoryCreate, categoryController.create);
 
 export default categoriesRouter;
