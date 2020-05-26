@@ -15,8 +15,8 @@ describe('Books', () => {
   });
 
   beforeEach(async () => {
-    await connection.query('DELETE FROM authors');
-    await connection.query('DELETE FROM categories');
+    // await connection.query('DELETE FROM authors');
+    // await connection.query('DELETE FROM categories');
     await connection.query('DELETE FROM books');
   });
 
@@ -28,25 +28,31 @@ describe('Books', () => {
   });
 
   it('it should be able to create a new book', async () => {
-    const response = await request(app).post('/books').send({
-      title: 'Organon',
-      sumary: 'Introdução a lógica formal',
-      price: 50,
-      pages: '60',
-      isbn: '123456789',
-      author_id: 1,
-      category_id: 1,
-    });
+    const response = await request(app)
+      .post('/books')
+      .send({
+        title: 'Organon',
+        summary: 'Introdução a lógica formal',
+        contents: 'Sumário do livro',
+        price: 50,
+        pages: 60,
+        isbn: '123456789',
+        date_publication: new Date(2021, 4, 21),
+        author_id: '0d1f8c0b-690c-4961-8b91-0927f559b811',
+        category_id: 'd08cda50-a018-4ffa-a7bc-c4929cc77a9b',
+      });
 
     expect(response.body).toEqual(
       expect.objectContaining({
         title: 'Organon',
-        sumary: 'Introdução a lógica formal',
+        summary: 'Introdução a lógica formal',
+        contents: 'Sumário do livro',
         price: 50,
-        pages: '60',
+        pages: 60,
         isbn: '123456789',
-        author_id: 1,
-        category_id: 1,
+        date_publication: new Date(2021, 4, 21),
+        author_id: '0d1f8c0b-690c-4961-8b91-0927f559b811',
+        category_id: 'd08cda50-a018-4ffa-a7bc-c4929cc77a9b',
       }),
     );
   });

@@ -19,7 +19,7 @@ export default class CreateCategoriesService {
       throw new AppError('Category already exists', 400);
     }
 
-    const category = await categoryRepository.create({ name });
+    const category = categoryRepository.create({ name });
 
     await categoryRepository.save(category);
 

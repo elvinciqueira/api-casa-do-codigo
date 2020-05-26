@@ -25,7 +25,7 @@ class CreateAuthorsService {
       throw new AppError('Email already registered', 400);
     }
 
-    const authors = await authorsRepository.create({
+    const authors = authorsRepository.create({
       name,
       email,
       description,
