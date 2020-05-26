@@ -1,13 +1,11 @@
 import { getRepository } from 'typeorm';
 
 import Books from '../models/Books';
-import Authors from '../models/Authors';
-import Category from '../models/Category';
 // import AppError from '../errors/AppError';
 
 interface IRequest {
-  author: Authors;
-  category: Category;
+  author_id: string;
+  category_id: string;
   title: string;
   summary: string;
   contents: string;
@@ -20,8 +18,8 @@ interface IRequest {
 class CreateBooksService {
   public async execute({
     title,
-    author,
-    category,
+    author_id,
+    category_id,
     pages,
     price,
     isbn,
@@ -32,8 +30,8 @@ class CreateBooksService {
     const booksRepository = getRepository(Books);
 
     const books = booksRepository.create({
-      category,
-      author,
+      category_id,
+      author_id,
       title,
       pages,
       price,

@@ -5,8 +5,8 @@ import CreateBooksService from '../services/CreateBooksService';
 export default class CreateBooksController {
   public async create(request: Request, response: Response): Promise<Response> {
     const {
-      category,
-      author,
+      category_id,
+      author_id,
       title,
       pages,
       isbn,
@@ -19,8 +19,8 @@ export default class CreateBooksController {
     const createBooks = new CreateBooksService();
 
     const books = await createBooks.execute({
-      category,
-      author,
+      category_id,
+      author_id,
       title,
       pages,
       isbn,
