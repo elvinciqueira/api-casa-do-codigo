@@ -6,6 +6,7 @@ import {
   UpdateDateColumn,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 
 import Authors from './Authors';
@@ -26,7 +27,7 @@ class Books {
   @Column()
   author_id: string;
 
-  @OneToOne(() => Authors)
+  @ManyToOne(() => Authors)
   @JoinColumn({ name: 'author_id' })
   author: Authors;
 
