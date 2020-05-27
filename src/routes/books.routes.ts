@@ -8,5 +8,6 @@ const booksRouter = Router();
 const booksController = new CreateBooksController();
 
 booksRouter.post('/', validateBooksCreate, booksController.create);
+booksRouter.get('/', booksController.index);
 
 export default booksRouter;
