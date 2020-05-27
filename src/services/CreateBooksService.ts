@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
 import Books from '../models/Books';
-// import AppError from '../errors/AppError';
+import AppError from '../errors/AppError';
 
 interface IRequest {
   author_id: string;
@@ -28,6 +28,22 @@ class CreateBooksService {
     contents,
   }: IRequest): Promise<Books> {
     const booksRepository = getRepository(Books);
+
+    const checkTitleExists = await booksRepository.findOne({
+      where: { title },
+    });
+
+    if (checkTitleExists) {
+      throw new AppError('Title already exists', 400);
+    }
+
+    const checkIsbnExists = await booksRepository.findOne({
+      where: { isbn },
+    });
+
+    if (checkIsbnExists) {
+      throw new AppError('No duplicated isbn allowed', 400);
+    }
 
     const books = booksRepository.create({
       category_id,

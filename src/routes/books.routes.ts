@@ -2,11 +2,11 @@ import { Router } from 'express';
 
 import CreateBooksController from '../controllers/CreateBooksController';
 
-// import validateCategoryCreate from '../validators/CategoryCreate';
+import validateBooksCreate from '../validators/BooksCreate';
 
 const booksRouter = Router();
 const booksController = new CreateBooksController();
 
-booksRouter.post('/', booksController.create);
+booksRouter.post('/', validateBooksCreate, booksController.create);
 
 export default booksRouter;
