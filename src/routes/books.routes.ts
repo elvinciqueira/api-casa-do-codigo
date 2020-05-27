@@ -5,8 +5,8 @@ import CreateBooksController from '../controllers/CreateBooksController';
 // import validateCategoryCreate from '../validators/CategoryCreate';
 
 const booksRouter = Router();
-const categoryController = new CreateBooksController();
+const booksController = new CreateBooksController();
 
-booksRouter.post('/', categoryController.create);
+booksRouter.post('/', booksController.create);
 
 export default booksRouter;

@@ -27,7 +27,7 @@ class Books {
   @Column()
   author_id: string;
 
-  @ManyToOne(() => Authors)
+  @ManyToOne(() => Authors, author => author.name)
   @JoinColumn({ name: 'author_id' })
   author: Authors;
 
