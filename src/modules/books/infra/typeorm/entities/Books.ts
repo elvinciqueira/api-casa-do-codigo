@@ -9,8 +9,8 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import Authors from './Authors';
-import Category from './Category';
+import Authors from '@modules/authors/infra/typeorm/entities/Authors';
+import Category from '@modules/categories/infra/typeorm/entities/Category';
 
 @Entity('books')
 class Books {

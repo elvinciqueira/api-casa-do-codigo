@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import Authors from '../models/Authors';
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
+import Authors from '../infra/typeorm/entities/Authors';
 
 interface IRequest {
   name: string;

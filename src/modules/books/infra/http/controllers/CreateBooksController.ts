@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import CreateBooksService from '../services/CreateBooksService';
-import ListBooksService from '../services/ListBooksService';
+import CreateBooksService from '@modules/books/services/CreateBooksService';
+import ListBooksService from '@modules/books/services/ListBooksService';
 
 export default class CreateBooksController {
   public async index(request: Request, response: Response): Promise<Response> {

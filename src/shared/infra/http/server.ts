@@ -4,10 +4,9 @@ import 'dotenv/config';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 
+import createConnection from '@shared/infra/typeorm';
+import AppError from '@shared/errors/AppError';
 import routes from './routes';
-import AppError from './errors/AppError';
-
-import createConnection from './database';
 
 createConnection();
 const app = express();

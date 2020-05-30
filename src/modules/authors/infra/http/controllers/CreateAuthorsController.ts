@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import CreateAuthorsService from '../services/CreateAuthorsService';
+
+import CreateAuthorsService from '@modules/authors/services/CreateAuthorsService';
 
 export default class CreateAuthorController {
   public async create(request: Request, response: Response): Promise<Response> {

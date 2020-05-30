@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import AppError from '../errors/AppError';
-import Category from '../models/Category';
+import AppError from '@shared/errors/AppError';
+import Category from '../infra/typeorm/entities/Category';
 
 interface IRquest {
   name: string;

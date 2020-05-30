@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import Books from '../models/Books';
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
+import Books from '../infra/typeorm/entities/Books';
 
 interface IRequest {
   author_id: string;

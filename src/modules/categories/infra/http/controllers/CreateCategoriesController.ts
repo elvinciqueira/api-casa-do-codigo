@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import CreateCategoriesService from '../services/CreateCategoriesService';
+import CreateCategoriesService from '@modules/categories/services/CreateCategoriesService';
 
 export default class CreateCategoriesController {
   public async create(request: Request, response: Response): Promise<Response> {

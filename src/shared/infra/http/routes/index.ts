@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
-import authorsRouter from './authors.routes';
-import categoriesRouter from './categories.routes';
-import booksRouter from './books.routes';
+import authorsRouter from '@modules/authors/infra/http/routes/authors.routes';
+import categoriesRouter from '@modules/categories/infra/http/routes/categories.routes';
+import booksRouter from '@modules/books/infra/http/routes/books.routes';
 
 const routes = Router();
 

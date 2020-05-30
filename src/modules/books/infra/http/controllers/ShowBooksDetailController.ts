@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import ListBooksDetailService from '../services/ListBooksDetailService';
+import ListBooksDetailService from '@modules/books/services/ListBooksDetailService';
 
 export default class ShowBooksDetailController {
   public async show(request: Request, response: Response): Promise<Response> {
