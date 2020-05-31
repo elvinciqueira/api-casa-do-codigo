@@ -8,6 +8,8 @@ import createConnection from '@shared/infra/typeorm';
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
 
+import '@shared/container';
+
 createConnection();
 
 const app = express();

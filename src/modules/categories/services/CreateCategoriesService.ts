@@ -1,27 +1,30 @@
-import { getRepository } from 'typeorm';
+import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import Category from '../infra/typeorm/entities/Category';
+import ICategoriesRepository from '../repositories/ICategoriesRepository';
 
 interface IRquest {
   name: string;
 }
 
+@injectable()
 export default class CreateCategoriesService {
-  public async execute({ name }: IRquest): Promise<Category> {
-    const categoryRepository = getRepository(Category);
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: ICategoriesRepository,
+  ) { }
 
-    const checkCategoryExists = await categoryRepository.findOne({
-      where: { name },
-    });
+  public async execute({ name }: IRquest): Promise<Category> {
+    const checkCategoryExists = await this.categoriesRepository.findByName(
+      name,
+    );
 
     if (checkCategoryExists) {
       throw new AppError('Category already exists', 400);
     }
 
-    const category = categoryRepository.create({ name });
-
-    await categoryRepository.save(category);
+    const category = await this.categoriesRepository.create({ name });
 
     return category;
   }
