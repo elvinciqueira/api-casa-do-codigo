@@ -1,7 +1,8 @@
-import { getRepository } from 'typeorm';
+import { inject, injectable } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import Books from '../infra/typeorm/entities/Books';
+import IBooksRepository from '../repositories/IBooksRepository';
 
 interface IRequest {
   author_id: string;
@@ -15,7 +16,13 @@ interface IRequest {
   date_publication: Date;
 }
 
+@injectable()
 class CreateBooksService {
+  constructor(
+    @inject('BooksRepository')
+    private booksRepository: IBooksRepository,
+  ) { }
+
   public async execute({
     title,
     author_id,
@@ -27,25 +34,19 @@ class CreateBooksService {
     summary,
     contents,
   }: IRequest): Promise<Books> {
-    const booksRepository = getRepository(Books);
-
-    const checkTitleExists = await booksRepository.findOne({
-      where: { title },
-    });
+    const checkTitleExists = await this.booksRepository.findByTitle(title);
 
     if (checkTitleExists) {
       throw new AppError('Title already exists', 400);
     }
 
-    const checkIsbnExists = await booksRepository.findOne({
-      where: { isbn },
-    });
+    const checkIsbnExists = await this.booksRepository.findByIsbn(isbn);
 
     if (checkIsbnExists) {
       throw new AppError('No duplicated isbn allowed', 400);
     }
 
-    const books = booksRepository.create({
+    const books = await this.booksRepository.create({
       category_id,
       author_id,
       title,
@@ -56,8 +57,6 @@ class CreateBooksService {
       summary,
       contents,
     });
-
-    await booksRepository.save(books);
 
     return books;
   }

@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 
+import { container } from 'tsyringe';
+
 import CreateBooksService from '@modules/books/services/CreateBooksService';
 import ListBooksService from '@modules/books/services/ListBooksService';
 
 export default class CreateBooksController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const showBooks = new ListBooksService();
+    const showBooks = container.resolve(ListBooksService);
 
     const books = await showBooks.execute();
 
@@ -25,7 +27,7 @@ export default class CreateBooksController {
       contents,
     } = request.body;
 
-    const createBooks = new CreateBooksService();
+    const createBooks = container.resolve(CreateBooksService);
 
     const books = await createBooks.execute({
       author_id,
